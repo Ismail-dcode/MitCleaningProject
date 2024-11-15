@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>MIT-Clean</title>
     <link rel="stylesheet" href="pro.css">
 
     <script src="https://kit.fontawesome.com/944d189c85.js" crossorigin="anonymous"></script>
@@ -12,22 +12,31 @@
 </head>
 
 <body>
+
+
+
+
+
+
+
     <div id="header">
         <div class="container">
             <nav>
-                <img src="Joined-Logo-2-e172077993499.png" class="logo">
+                <img src="Screenshot_2024-11-16_023732-removebg-preview.png" class="logo">
+                <br> 
                 <ul id="sidemenu">
                     <li><a href="#header">Home</a></li>
                     <li><a href="#about">About Project</a></li>
                     <li><a href="#Projects">Projects Resource</a></li>
                     <li><a href="#Contact">Contact developer</a></li>
+                    <i id="sir" class="fa-solid fa-xmark" onclick="closemenu()"></i>
+                </ul>
+                <i id="sir" class="fa-solid fa-bars" onclick="openmenu()"></i>
+
+                <br>
+                <br>
 
 
-
-                    <br>
-                    <br>
-
-                   
         </div>
         <div class="contact-right">
             <form name="submit-to-google-sheet">
@@ -45,8 +54,10 @@
 
                 <textarea name="Exact Location" row="6" placeholder="Exact Location :Ex. class room no.202"></textarea>
                 <textarea name="What kind Cleaning Stuff" row="6" placeholder="What Kind Of Stuff"></textarea>
-            <span class="TT">please wait 5s after submit </span>
-            <br>
+                <br>
+                <textarea name="Feedback" row="6" placeholder="Any Feedback For Our Cleaning Staff"></textarea>
+                <span class="TT">please wait 5s after submit </span>
+                <br>
                 <button type="submit" class="btn btn2">Submit</button>
             </form>
             <span id="msg"></span>
@@ -69,8 +80,9 @@
                     <div class="about-col-2">
                         <h1 class="nano">About This Project</h1>
                         <br>
-                        <p>Here is Project in which students interact with web site and give responce in term of 
-                            task which stored in database system sheet which can be seen by Cleaning staff and exicute there work
+                        <p>Here is Project in which students interact with web site and give responce in term of
+                            task which stored in database system sheet which can be seen by Cleaning staff and exicute
+                            there work
                             on that given task bases
                             <br>
                             <br>
@@ -79,18 +91,18 @@
 
                         <div class="tab-title">
                             <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
-                            
+
                         </div>
                         <div class="tab-contents active-tab" id="skills">
                             <br>
 
                             <ul>
-                                
+
                                 <li><span>Web Development</span><br>Pure Development</li>
                                 <li><span>Languages</span><br>JavaScript , HTML & CSS</li>
                             </ul>
                         </div>
-                        
+
                     </div>
 
                 </div>
@@ -108,19 +120,19 @@
 
         <div class="project_container">
             <article class="project_card">
-                    <br>
-                    <div class="projects_skills">
-                        
-                    </div>
-                    <pre>Projecet Report & Certificate</pre>
-                    <a href="" download class="btn btn2">Project Report</a>
-                    <br>
-                    <pre>Project Survey Details</pre>
-                    <a href="MIT CLEANING DEPARTMENT.pdf" target="_blank" download class="btn btn2">Survey Details</a>
-                       
-                    </a>
+                <br>
+                <div class="projects_skills">
+
                 </div>
-            </article>
+                <pre>Projecet Report & Certificate</pre>
+                <a href="" download class="btn btn2">Project Report</a>
+                <br>
+                <pre>Project Survey Details</pre>
+                <a href="MIT CLEANING DEPARTMENT.pdf" target="_blank" download class="btn btn2">Survey Details</a>
+
+                </a>
+        </div>
+        </article>
         </div>
 
 
@@ -143,7 +155,6 @@
 
                     </div>
 
-                  
 
 
 
@@ -151,64 +162,63 @@
 
 
 
-                <script>
 
-                    var tablinks = document.getElementsByClassName("tab-links");
-                    var tabcontents = document.getElementsByClassName("tab-contents");
-                    function opentab(tabname) {
-                        for (tablink of tablinks) {
-                            tablink.classList.remove("active-link");
+                    <script>
+
+                        var tablinks = document.getElementsByClassName("tab-links");
+                        var tabcontents = document.getElementsByClassName("tab-contents");
+                        function opentab(tabname) {
+                            for (tablink of tablinks) {
+                                tablink.classList.remove("active-link");
+                            }
+
+                            for (tabcontent of tabcontents) {
+                                tabcontent.classList.remove("active-tab");
+                            }
+                            event.currentTarget.classList.add("active-link");
+                            document.getElementById(tabname).classList.add("active-tab")
                         }
+                    </script>
 
-                        for (tabcontent of tabcontents) {
-                            tabcontent.classList.remove("active-tab");
+
+
+                    <script>
+                        const scriptURL = 'https://script.google.com/macros/s/AKfycbz6IyaRFQz6XbjGchOz8Fm5iqkqGer0BrZjjMztYii9CF-2oPiQK2DXecQFZHh9AYiB/exec'
+                        const form = document.forms['submit-to-google-sheet']
+                        const msg = document.getElementById("msg")
+                        form.addEventListener('submit', e => {
+                            e.preventDefault()
+                            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                                .then(response => {
+                                    msg.innerHTML = "Your Responce has been Recorded "
+                                    setTimeout(function () {
+                                        msg.innerHTML = ""
+                                    }, 5000)
+                                    form.reset()
+                                })
+                                .catch(error => console.error('Error!', error.message))
+                        })
+                    </script>
+
+                    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+                    <script>
+                        var typed = new Typed('#element', {
+                            strings: ['Aspiring AI engineer', 'Expert in using GEN AI Tools ', 'Web Developer [Front end]'],
+                            typeSpeed: 50,
+                        })
+                    </script>
+                    <script>
+                        var sidemenu = document.getElementById("sidemenu");
+
+                        function openmenu() {
+                            sidemenu.style.right = "0";
+
                         }
-                        event.currentTarget.classList.add("active-link");
-                        document.getElementById(tabname).classList.add("active-tab")
-                    }
-                </script>
+                        function closemenu() {
+                            sidemenu.style.right = "-200px";
 
-
-                <script>
-
-                    var sidemenu = document.getElementById("sidemenu");
-
-                    function openmenu() {
-                        sidemenu.style.right = "0";
-
-                    }
-                    function closemenu() {
-                        sidemenu.style.right = "-200";
-
-                    }
-                </script>
-
-                <script>
-                    const scriptURL = 'https://script.google.com/macros/s/AKfycbz6IyaRFQz6XbjGchOz8Fm5iqkqGer0BrZjjMztYii9CF-2oPiQK2DXecQFZHh9AYiB/exec'
-                    const form = document.forms['submit-to-google-sheet']
-                    const msg = document.getElementById("msg")
-                    form.addEventListener('submit', e => {
-                        e.preventDefault()
-                        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-                            .then(response => {
-                                msg.innerHTML = "Your Responce has been Recorded "
-                                setTimeout(function () {
-                                    msg.innerHTML = ""
-                                }, 5000)
-                                form.reset()
-                            })
-                            .catch(error => console.error('Error!', error.message))
-                    })
-                </script>
-
-                <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-                <script>
-                    var typed = new Typed('#element', {
-                        strings: ['Aspiring AI engineer', 'Expert in using GEN AI Tools ', 'Web Developer [Front end]'],
-                        typeSpeed: 50,
-                    })
-                </script>
-
+                        }
+                    </script>
 
 </body>
 
